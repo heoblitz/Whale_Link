@@ -1,0 +1,28 @@
+{
+    "manifest_version": 2,
+    "name": "whalelink",
+    "description": "네이버 서비스를 빠르게 이용하기",
+    "version": "1.0",
+    "background": {
+        "scripts":["background.js"]
+    },
+    "permissions" : ["tabs"],
+    "browser_action": {
+        "default_icon": {
+            "16": "icons/page-16.png",
+            "32": "icons/page-32.png"
+        },
+        "default_title": "네이버 링크",
+        "default_popup": "popup.html"
+    },
+    "commands": {
+        "_execute_browser_action": {
+          "suggested_key": {
+            "windows": "Alt+A",
+            "mac": "Command+Shift+A",
+            "chromeos": "Ctrl+A",
+            "linux": "Ctrl+A"
+            }
+        }
+    }
+}
