@@ -6,6 +6,6 @@ ex) "지도 그린팩토리" 입력
 
 ![Alt Text](/example.png)
 
-Chrome Extension
+## Chrome Extension
 
-Frontend : HTML+CSS / vanilla js
+* Frontend : HTML+CSS / vanilla js
