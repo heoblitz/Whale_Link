@@ -4,7 +4,7 @@
 
 ex) "지도 그린팩토리" 입력
 
-![Alt Text](/example.png)
+<kbd>![Alt Text](/example.png)</kdb>
 
 ## Chrome Extension
 
