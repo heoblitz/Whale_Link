@@ -15,6 +15,7 @@ var urlList = {
     플레이스 : "https://store.naver.com/restaurants/list?page=1&query=",
     웹툰 : "https://comic.naver.com/search.nhn?keyword="
 };
+// 이중 배열로 수정하자.
  
 function userKey(){ // user enter 입력 감지.
     if(window.event.keyCode == 13){
