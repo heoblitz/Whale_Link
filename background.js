@@ -1,21 +1,11 @@
-/*
-var host = "http://tpb.pirateparty.org.uk";
-chrome.webRequest.onBeforeRequest.addListener(
-    function(details) {
-         return {redirectUrl: host + details.url.match(/^https?:\/\/[^\/]+([\S\s]*)/)[1]};
-    },
-    {
-        urls: [
-            "*://piratebay.se/*",
-            "*://www.piratebay.se/*"
-        ],
-        types: ["main_frame", "sub_frame", "stylesheet", "script", "image", "object", "xmlhttprequest", "other"]
-    },
-    ["blocking"]
-);
+chrome.runtime.onInstalled.addListener(function() {
+    /*
+    chrome.contextMenus.create({
+      "id": "sampleContextMenu",
+      "title": "Sample Context Menu",
+      "contexts": ["selection"]
+    });
+    */
 
-
-        "webRequest",
-        "webRequestBlocking",
-        "*://*.naver.com/",
-*/
+    Console.log("hello");
+  });
