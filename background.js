@@ -1,11 +1,12 @@
-chrome.runtime.onInstalled.addListener(function() {
-    /*
-    chrome.contextMenus.create({
-      "id": "sampleContextMenu",
-      "title": "Sample Context Menu",
-      "contexts": ["selection"]
-    });
-    */
+var theValue = ["a", "b"];
 
-    Console.log("hello");
-  });
+chrome.runtime.onInstalled.addListener(function() {
+  chrome.storage.local.set({"저장": theValue}, function () {
+    // 저장 완료
+});
+
+chrome.storage.local.get("저장", function (items) {
+  alert(items.저장);
+  // items: 저장한 객체의 key/value
+});
+});

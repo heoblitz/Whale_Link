@@ -8,7 +8,7 @@
     },
     "permissions" : [
         "tabs",
-        "storage",
+        "storage"
     ],
     "browser_action": {
         "default_icon": {
@@ -22,9 +22,9 @@
         "_execute_browser_action": {
           "suggested_key": {
             "windows": "Alt+A",
-            "mac": "Command+Shift+A",
-            "chromeos": "Ctrl+A",
-            "linux": "Ctrl+A"
+            "mac": "Ctrl+A",
+            "chromeos": "Alt+A",
+            "linux": "Alt+A"
             }
         }
     }
