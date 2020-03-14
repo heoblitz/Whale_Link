@@ -26,6 +26,10 @@ function userClick(){ // user button 클릭 감지.
 
     if (userInputList[0] == "지도") { // 예외적으로 GET query 사용하지 않음
         custumUrl = urlList[userInputList[0]][0];
+
+        chrome.storage.local.get(["hi"], function (result) {
+            alert("work" + result["hi"]);
+          });
     }
     
     else {
@@ -55,6 +59,11 @@ function userKey(){ // user enter 입력 감지.
 
         if (userInputList[0] == "지도") { 
             custumUrl = urlList[userInputList[0]][0];
+
+            chrome.storage.local.get(["hi"], function (result) {
+                alert("work" + result["hi"]);
+              });
+
         }
         
         else {
