@@ -1,0 +1,149 @@
+@charset "utf-8";
+/*@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&display=swap');*/
+
+html, body, div, h1, h2, h3, ul, li, button, input{
+    margin: 0;
+    padding: 0;
+}
+/*
+html, body, div, h1, h2, h3, ul, li, button, input {
+    font-family: "Nanum Gothic Coding","Segoe UI", Arial, "Malgun Gothic", Gulim, sans-serif;
+}*/
+
+ul, ol {
+    list-style: none;
+}
+
+body {
+    background-color: #f6f8fa;
+}
+
+img {
+    vertical-align: middle;
+}
+
+button:hover{
+  cursor: pointer;
+}
+
+input,button:focus{
+  outline: none;
+}
+
+.header {
+    height: 56px;
+    background-color: rgb(94,206,181);
+}
+
+.header .main-title {
+    margin: 0 auto;
+    width: 700px;
+    height: 56px;
+    line-height: 56px;
+    font-size: 35px;
+    color: white;
+}
+
+.contents {
+    margin: 20px auto;
+    width: 700px;
+}
+
+.contents .menu-title {
+    display: inline-block;
+    font-weight: normal;
+    margin-bottom: 15px;
+}
+
+.contents .menu-save {
+    float: right;
+    margin-top: 1px;
+    width: 64px;
+    height: 22px;
+    color: #fff;
+    font-size: 13px;
+    background-color: darkgray;
+    border-radius: 3px;
+    border: none;
+    margin-right: 25px;
+}
+
+.contents {
+    overflow: hidden;
+    border-top: 0;
+    padding: 5px;
+}
+
+.container::after{
+  display: block;
+  content: '';
+  clear: both;
+}
+
+.contents .contents-list {
+    float: left;
+    overflow: hidden;
+    height: 46px;
+    width: 200px;
+    padding: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: rgb(255,255,255);
+}
+
+.contents .contents-list:nth-child(3n+1){
+    margin-left: 0;
+}
+
+.contents .contents-list .query-name {
+    float: left;
+    margin-right: 5px;
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.contents .contents-list .shortcut {
+    float: left;
+    height: 20px;
+    line-height: 20px;
+    font-size: 12px;
+    color: grey;
+}
+
+.contents .contents-list .contents-hotkey {
+    width: 138px;
+    height: 16px;
+    padding-left: 2px;
+}
+
+.contents .contents-list .contents-image {
+    float: left;
+    margin-left: 4px;
+    margin-right: 10px;
+    margin-top: 3px;
+    width: 36px;
+    height: 36px;
+}
+
+.contents .contents-list .service-title {
+    display: inline-block;
+    margin-left: 14px;
+    margin-top: 12px;
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.contents .contents-list .service-add {
+    float: right;
+    margin-right: 15px;
+    margin-top: 11px;
+    width: 39px;
+    height: 21px;
+    border:none;
+    color: #fff;
+    font-size: 12px;
+    background-color: darkgray;
+    border-radius: 3px;
+    margin-left: 3px;
+}
