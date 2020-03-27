@@ -2,19 +2,18 @@ document.addEventListener('keydown', userKey);
 var send = document.getElementById('send');
 send.onclick = userClick;
 
-var urlList = {
-    부동산 : ["https://new.land.naver.com/search", "sk"],
-    쇼핑 : ["https://search.shopping.naver.com/search/all.nhn", "query"],
-    지도 : ["https://map.naver.com/v5/search/", ""],
-    사전 : ["https://dict.naver.com/search.nhn", "query"],
-    지식인 : ["https://kin.naver.com/search/list.nhn", "query"],
-    포스트 : ["https://post.naver.com/search/post.nhn", "keyword"],
-    구지도 : ["https://map.naver.com/?sm=hty", "query"],
-    tv : ["https://tv.naver.com/search/clip", "query"],
-    검색 : ["https://search.naver.com/search.naver", "query"],
-    플레이스 : ["https://store.naver.com/restaurants/list", "query"],
-    웹툰 : ["https://comic.naver.com/search.nhn", "keyword"],
-};
+var urlList = [
+    ["부동산", "https://new.land.naver.com/search?sk={query}}", "https://search.naver.com/favicon.ico"],
+    ["쇼핑", "https://search.shopping.naver.com/search/all.nhn?query={query}", "https://land.naver.com/favicon.ico"],
+    ["지도", "https://map.naver.com/v5/search/{query}", "https://ssl.pstatic.net/imgshopping/cnsv/p/im/home/favicon.ico"],
+    ["사전", "https://dict.naver.com/search.nhn?query={query}", "https://dict.naver.com/favicon.ico"],
+    ["지식인", "https://kin.naver.com/search/list.nhn?query={query}", "https://kin.naver.com/favicon.ico"],
+    ["포스트", "https://post.naver.com/search/post.nhn?keyword={query}", "https://post.naver.com/favicon.ico"],
+    ["네이버 TV", "https://tv.naver.com/search/clip?query={query}", "https://tv.naver.com/favicon.ico"],
+    ["검색", "https://search.naver.com/search.naver?query={query}", "https://ssl.pstatic.net/static/comic/favicon/webtoon_favicon_32x32.ico"],
+    ["플레이스", "https://store.naver.com/restaurants/list?query={query}", "https://store.naver.com/favicon.ico"],
+    ["웹툰", "https://comic.naver.com/search.nhn?keyword={query}", "https://ssl.pstatic.net/static/comic/favicon/webtoon_favicon_32x32.ico"],
+];
 // 이중 배열로 수정하자.
  
 function userClick(){ // user button 클릭 감지.
@@ -48,6 +47,7 @@ function userClick(){ // user button 클릭 감지.
         chrome.tabs.update(tab.id, {url: custumUrl}); // chrome method 사용
     });
 };
+
 
 function userKey(){ // user enter 입력 감지.
     if(window.event.keyCode == 13){
