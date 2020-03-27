@@ -2,6 +2,60 @@ document.addEventListener('keydown', userKey);
 var send = document.getElementById('send');
 send.onclick = userClick;
 
+
+ 
+function userClick(){ // user button 클릭 감지.
+    AccessToUrl();
+}
+
+
+function userKey(){ // user enter 입력 감지.
+    if(window.event.keyCode == 13){
+        AccessToUrl();
+    }
+}
+
+function AccessToUrl() {
+    var userInput = document.getElementById("query").value;
+    var custumUrl;
+    var i;
+
+    userInputList = userInput.split(' ');
+
+    if (userInputList[0] == "지도") { 
+        custumUrl = urlList[userInputList[0]][0];
+
+        chrome.storage.local.get(["hi"], function (result) {
+            alert("work" + result["hi"]);
+        });
+
+    }
+
+    else {
+        custumUrl = urlList[userInputList[0]][0]; // index 0 일때 
+        custumUrl = custumUrl + "?" + urlList[userInputList[0]][1] + "=";
+    }
+
+    for(i=1;i<userInputList.length;i++){ // 사용자가 공백을 주고 입력한 값 for 문 돌림
+        custumUrl += encodeURI(userInputList[i]); 
+
+        if(i != userInputList.length-1){ // 문자열 끝이 아니라면 공백 추가
+            custumUrl += ' ';
+        }
+    }
+
+    chrome.tabs.query({currentWindow: true, active: true}, function(tab){
+        chrome.tabs.update(tab.id, {url: custumUrl});
+    });
+}
+
+function ParseCommand() {
+    var userInput = document.getElementById("query").value;
+
+}
+
+
+/*
 var urlList = [
     ["부동산", "https://new.land.naver.com/search?sk={query}}", "https://search.naver.com/favicon.ico"],
     ["쇼핑", "https://search.shopping.naver.com/search/all.nhn?query={query}", "https://land.naver.com/favicon.ico"],
@@ -15,72 +69,4 @@ var urlList = [
     ["웹툰", "https://comic.naver.com/search.nhn?keyword={query}", "https://ssl.pstatic.net/static/comic/favicon/webtoon_favicon_32x32.ico"],
 ];
 // 이중 배열로 수정하자.
- 
-function userClick(){ // user button 클릭 감지.
-    var userInput = document.getElementById("query").value;
-    var custumUrl;
-    var i;
-
-    userInputList = userInput.split(' ');
-
-    if (userInputList[0] == "지도") { // 예외적으로 GET query 사용하지 않음
-        custumUrl = urlList[userInputList[0]][0];
-
-        chrome.storage.local.get(["hi"], function (result) {
-            alert("work" + result["hi"]);
-          });
-    }
-    
-    else {
-        custumUrl = urlList[userInputList[0]][0]; // index 0 일때 
-        custumUrl = custumUrl + "?" + urlList[userInputList[0]][1] + "=";
-    }
-    for(i=1;i<userInputList.length;i++){ // 사용자가 공백을 주고 입력한 값 for 문 돌림
-        custumUrl += encodeURI(userInputList[i]); 
-
-        if(i != userInputList.length-1){ // 문자열 끝이 아니라면 공백 추가
-            custumUrl += ' ';
-        }
-    }
-
-    chrome.tabs.query({currentWindow: true, active: true}, function(tab){
-        chrome.tabs.update(tab.id, {url: custumUrl}); // chrome method 사용
-    });
-};
-
-
-function userKey(){ // user enter 입력 감지.
-    if(window.event.keyCode == 13){
-        var userInput = document.getElementById("query").value;
-        var custumUrl;
-        var i;
-
-        userInputList = userInput.split(' ');
-
-        if (userInputList[0] == "지도") { 
-            custumUrl = urlList[userInputList[0]][0];
-
-            chrome.storage.local.get(["hi"], function (result) {
-                alert("work" + result["hi"]);
-              });
-
-        }
-        
-        else {
-            custumUrl = urlList[userInputList[0]][0]; // index 0 일때 
-            custumUrl = custumUrl + "?" + urlList[userInputList[0]][1] + "=";
-        }
-
-        for(i=1;i<userInputList.length;i++){ // 사용자가 공백을 주고 입력한 값 for 문 돌림
-            custumUrl += encodeURI(userInputList[i]); 
-    
-            if(i != userInputList.length-1){ // 문자열 끝이 아니라면 공백 추가
-                custumUrl += ' ';
-            }
-        }
-
-        chrome.tabs.query({currentWindow: true, active: true}, function(tab){
-            chrome.tabs.update(tab.id, {url: custumUrl});
-        });
-    }
-};
+*/

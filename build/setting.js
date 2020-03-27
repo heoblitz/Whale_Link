@@ -11,7 +11,7 @@ var urlList = [
     ["웹툰", "https://comic.naver.com/search.nhn?keyword={query}", "https://ssl.pstatic.net/static/comic/favicon/webtoon_favicon_32x32.ico", "네이버 웹툰"],
 ];
 
-var PostsDto = function (serviceName, url, faviconUrl, hotKey) {
+var DataDto = function (serviceName, url, faviconUrl, hotKey) {
     this.serviceName = serviceName;
     this.url = url;
     this.faviconUrl = faviconUrl;
@@ -22,7 +22,7 @@ var Posts = Array();
 
 if (localStorage.getItem("Posts") == null) {
     for (var i = 0; i < urlList.length; i++) {
-        var post = new PostsDto(urlList[i][0], urlList[i][1], urlList[i][2], urlList[i][3]);
+        var post = new DataDto(urlList[i][0], urlList[i][1], urlList[i][2], urlList[i][3]);
         Posts.push(post);
     }
 
