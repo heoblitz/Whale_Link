@@ -11,6 +11,7 @@ var urlList = [
     ["웹툰", "https://comic.naver.com/search.nhn?keyword={query}", "https://ssl.pstatic.net/static/comic/favicon/webtoon_favicon_32x32.ico", "네이버 웹툰"],
 ];
 
+
 var DataDto = function (serviceName, url, faviconUrl, hotKey) {
     this.serviceName = serviceName;
     this.url = url;
@@ -18,21 +19,25 @@ var DataDto = function (serviceName, url, faviconUrl, hotKey) {
     this.hotKey = hotKey;
 }
 
-var Posts = Array();
+var PostDto = function (Hotkey, datadto) {
+    let post = {}
+    post[Hotkey] = datadto;
+
+    return post;
+}
+
+var Posts = new Map();
 
 if (localStorage.getItem("Posts") == null) {
-    for (var i = 0; i < urlList.length; i++) {
-        var post = new DataDto(urlList[i][0], urlList[i][1], urlList[i][2], urlList[i][3]);
-        Posts.push(post);
+    for (let i = 0; i < urlList.length; i++) {
+        let data = new DataDto(urlList[i][0], urlList[i][1], urlList[i][2], urlList[i][3]);
+        Posts.set(urlList[i][0], data);
     }
 
+    Posts = mapToObj(Posts);
+
     localStorage.setItem("Posts", JSON.stringify(Posts));
-
-    //alert("Posts is Setting now");
-
     Posts = JSON.parse(localStorage.getItem("Posts"));
-
-    //alert("Posts is Setting & Getting now");
 
     renderPosts();
 }
@@ -40,23 +45,23 @@ if (localStorage.getItem("Posts") == null) {
 else {
     Posts = JSON.parse(localStorage.getItem("Posts"));
 
-    //alert("Posts is Getting now");
+    alert("Posts is Getting now");
 
     renderPosts();
 }
 
 function renderPosts() {
-    var container = document.getElementsByClassName("container")[0];
+    let container = document.getElementsByClassName("container")[0];
 
-    for(var i = 0; i < Posts.length; i++) {
-        container.insertAdjacentHTML('beforeend', createHtmlList(Posts[i]))
+    for(let hotKey in Posts ) {
+        container.insertAdjacentHTML('beforeend', createHtmlList(Posts[hotKey]))
     }
 
     //alert("render is complete!");
 }
 
 function createHtmlList(data) {
-    var htmlCode = "<li class=\"contents-list\">" +
+    let htmlCode = "<li class=\"contents-list\">" +
                         "<img src=\"" + data["faviconUrl"] + "\" class=\"contents-image\">" +
                         "<h3 class=\"query-name\">" + data["serviceName"] + "</h3>" +
                         "<span class=\"shortcut\">단축키</span>" +
@@ -64,4 +69,14 @@ function createHtmlList(data) {
                         "</li>";
 
     return htmlCode;
+}
+
+function mapToObj(inputMap) {
+    let obj = {};
+
+    inputMap.forEach(function(value, key){
+        obj[key] = value
+    });
+
+    return obj;
 }
