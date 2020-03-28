@@ -50,8 +50,10 @@ function renderPosts() {
     let container = document.getElementsByClassName("container")[0];
 
     for(let hotKey in Posts ) {
-        container.insertAdjacentHTML('beforeend', createHtmlList(Posts[hotKey]))
+        container.insertAdjacentHTML('beforeend', createHtmlList(Posts[hotKey]));
     }
+
+    container.insertAdjacentHTML('beforeend', createAddButton());
 
     //alert("render is complete!");
 }
@@ -62,6 +64,15 @@ function createHtmlList(data) {
                         "<h3 class=\"query-name\">" + data["serviceName"] + "</h3>" +
                         "<span class=\"shortcut\">단축키</span>" +
                         "<input type=\"text\" value=\"" + data["hotKey"] + "\" class=\"contents-hotkey\">" +
+                    "</li>";
+
+    return htmlCode;
+}
+
+function createAddButton() {
+    let htmlCode = "<li class=\"contents-list\">" +
+                        "<h3 class=\"service-title\">다른 서비스 추가하기</h3>" +
+                        "<button class=\"service-add\">추가</button>" + 
                     "</li>";
 
     return htmlCode;
