@@ -51,7 +51,8 @@ function renderPosts(Posts) {
 
 function createHtmlList(data) {
     let htmlCode = "<li class=\"contents-list\">" +
-                        "<a href=\"" + data["url"].substring(0, data["url"].length - 8) + "\">" + // {query} 로 GET 보내면 404 리턴하는 사이트 존재.
+                        //"<a href=\"" + data["url"].substring(0, data["url"].length - 8) + "\">" + // {query} 로 GET 보내면 404 리턴하는 사이트 존재.
+                        "<a href=\"" + data["url"] + "\">" +
                             "<img src=\"" + data["faviconUrl"] + "\" class=\"contents-image\">" + // 슬라이싱 해서 뻬준다.
                         "</a>" +
                         "<h3 class=\"query-name\">" + data["serviceName"] + "</h3>" +
@@ -114,7 +115,7 @@ function getHtmlData() {
         contentsList.push(
             [
                 contents[i].querySelector('.query-name').innerText,
-                contents[i].querySelector('a').href,
+                decodeURI(contents[i].querySelector('a').href),
                 contents[i].querySelector('.contents-image').src,
                 contents[i].querySelector('.contents-hotkey').value
             ]);
@@ -124,15 +125,27 @@ function getHtmlData() {
 }
 
 function SaveUserConfig() {
-    alert("good");
-
     let contetsList;
     let posts;
 
-    contentsList = getHtmlData();
-    alert(contentsList);
-    posts = saveData(contentsList);
-    /*
-    renderPosts(posts);
-    */
+    contentsList = getHtmlData(); // setting.html 태그 값 읽어서 배열로 리턴
+
+    if (!checkDuplicate(contentsList)) { // False 일 때 저장 허용.
+        posts = saveData(contentsList);
+        alert("저장되었습니다.");
+    }
+
+    else {
+        alert("단축키는 중복될 수 없습니다!");
+    }
+}
+
+function checkDuplicate(contentsList) {
+    let hotKeyList = new Array();
+
+    for(let i = 0; i < contentsList.length; i++) {
+        hotKeyList.push(contentsList[i][3]);
+    }
+
+    return new Set(hotKeyList).size !== hotKeyList.length; // 중복된 요소가 있으면 False return
 }
