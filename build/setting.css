@@ -80,6 +80,9 @@ input,button:focus{
   clear: both;
 }
 
+
+
+
 .contents .contents-list {
     float: left;
     overflow: hidden;
@@ -126,15 +129,19 @@ input,button:focus{
     height: 36px;
 }
 
-.contents .contents-list .service-title {
-    display: inline-block;
-    margin-left: 14px;
-    margin-top: 12px;
-    font-size: 15px;
-    font-weight: normal;
+.contents .contents-list-add {
+    float: left;
+    overflow: hidden;
+    height: 46px;
+    width: 200px;
+    padding: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: rgb(255,255,255);
 }
 
-.contents .contents-list .service-add {
+.contents .contents-list-add .service-add {
     float: right;
     margin-right: 15px;
     margin-top: 11px;
@@ -146,4 +153,12 @@ input,button:focus{
     background-color: darkgray;
     border-radius: 3px;
     margin-left: 3px;
+}
+
+.contents .contents-list-add .service-title {
+    display: inline-block;
+    margin-left: 14px;
+    margin-top: 12px;
+    font-size: 15px;
+    font-weight: normal;
 }

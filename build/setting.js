@@ -11,6 +11,8 @@ var urlList = [
     ["네이버 웹툰", "https://comic.naver.com/search.nhn?keyword={query}", "https://ssl.pstatic.net/static/comic/favicon/webtoon_favicon_32x32.ico", "웹툰"],
 ];
 
+document.getElementById("save-button").addEventListener("click", SaveUserConfig);
+
 var DataDto = function (serviceName, url, faviconUrl, hotKey) {
     this.serviceName = serviceName;
     this.url = url;
@@ -25,28 +27,19 @@ var PostDto = function (Hotkey, datadto) {
     return post;
 }
 
-var Posts = new Map();
-
 if (localStorage.getItem("Posts") == null) {
-    for (let i = 0; i < urlList.length; i++) {
-        let data = new DataDto(urlList[i][0], urlList[i][1], urlList[i][2], urlList[i][3]);
-        Posts.set(urlList[i][3], data);
-    }
-
-    Posts = mapToObj(Posts);
-
-    localStorage.setItem("Posts", JSON.stringify(Posts));
-    Posts = JSON.parse(localStorage.getItem("Posts"));
-
-    renderPosts();
+    saveData(urlList)
+    let Posts = getData();
+    renderPosts(Posts);
 }
 
 else {
-    Posts = JSON.parse(localStorage.getItem("Posts"));
-    renderPosts();
+    // Posts = JSON.parse(localStorage.getItem("Posts"));
+    let Posts = getData();
+    renderPosts(Posts);
 }
 
-function renderPosts() {
+function renderPosts(Posts) {
     let container = document.getElementsByClassName("container")[0];
 
     for(let hotKey in Posts ) {
@@ -54,13 +47,13 @@ function renderPosts() {
     }
 
     container.insertAdjacentHTML('beforeend', createAddButton());
-
-    //alert("render is complete!");
 }
 
 function createHtmlList(data) {
     let htmlCode = "<li class=\"contents-list\">" +
-                        "<img src=\"" + data["faviconUrl"] + "\" class=\"contents-image\">" +
+                        "<a href=\"" + data["url"].substring(0, data["url"].length - 8) + "\">" + // {query} 로 GET 보내면 404 리턴하는 사이트 존재.
+                            "<img src=\"" + data["faviconUrl"] + "\" class=\"contents-image\">" + // 슬라이싱 해서 뻬준다.
+                        "</a>" +
                         "<h3 class=\"query-name\">" + data["serviceName"] + "</h3>" +
                         "<span class=\"shortcut\">단축키</span>" +
                         "<input type=\"text\" value=\"" + data["hotKey"] + "\" class=\"contents-hotkey\">" +
@@ -70,7 +63,7 @@ function createHtmlList(data) {
 }
 
 function createAddButton() {
-    let htmlCode = "<li class=\"contents-list\">" +
+    let htmlCode = "<li class=\"contents-list-add\">" +
                         "<h3 class=\"service-title\">다른 서비스 추가하기</h3>" +
                         "<button class=\"service-add\">추가</button>" + 
                     "</li>";
@@ -86,4 +79,60 @@ function mapToObj(inputMap) {
     });
 
     return obj;
+}
+
+function saveData(urlList) {
+    let Posts = new Map();
+
+    for (let i = 0; i < urlList.length; i++) {
+        let data = new DataDto(urlList[i][0], urlList[i][1], urlList[i][2], urlList[i][3]);
+        Posts.set(urlList[i][3], data);
+    }
+
+    Posts = mapToObj(Posts);
+
+    localStorage.setItem("Posts", JSON.stringify(Posts));
+    Posts = JSON.parse(localStorage.getItem("Posts"));
+
+    return Posts;
+}
+
+function getData() {
+    let Posts;
+
+    Posts = JSON.parse(localStorage.getItem("Posts"));
+
+    return Posts;
+}
+
+function getHtmlData() {
+    
+    let contents = document.getElementsByClassName("contents-list");
+    let contentsList = new Array();
+
+    for(var i=0; i<contents.length; i++) {
+        contentsList.push(
+            [
+                contents[i].querySelector('.query-name').innerText,
+                contents[i].querySelector('a').href,
+                contents[i].querySelector('.contents-image').src,
+                contents[i].querySelector('.contents-hotkey').value
+            ]);
+    }
+
+    return contentsList;
+}
+
+function SaveUserConfig() {
+    alert("good");
+
+    let contetsList;
+    let posts;
+
+    contentsList = getHtmlData();
+    alert(contentsList);
+    posts = saveData(contentsList);
+    /*
+    renderPosts(posts);
+    */
 }
