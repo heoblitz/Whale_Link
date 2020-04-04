@@ -1,4 +1,5 @@
 document.addEventListener('keydown', userKey);
+
 var send = document.getElementById('send');
 send.onclick = userClick;
 

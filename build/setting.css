@@ -80,9 +80,6 @@ input,button:focus{
   clear: both;
 }
 
-
-
-
 .contents .contents-list {
     float: left;
     overflow: hidden;
@@ -102,7 +99,7 @@ input,button:focus{
 .contents .contents-list .query-name {
     float: left;
     margin-right: 5px;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: normal;
 }
 
@@ -143,8 +140,8 @@ input,button:focus{
 
 .contents .contents-list-add .service-add {
     float: right;
-    margin-right: 15px;
-    margin-top: 11px;
+    margin-right: 6px;
+    margin-top: 12px;
     width: 39px;
     height: 21px;
     border:none;
@@ -159,6 +156,6 @@ input,button:focus{
     display: inline-block;
     margin-left: 14px;
     margin-top: 12px;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: normal;
 }
