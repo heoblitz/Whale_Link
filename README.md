@@ -6,5 +6,3 @@
 ## Chrome Extension
 
 * Frontend : HTML+CSS / vanilla js
-
-* Refactoring to React in react branch.
