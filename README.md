@@ -6,3 +6,4 @@
 ## Chrome Extension
 
 * Frontend : HTML+CSS / vanilla js
+* Chrome Storage API
