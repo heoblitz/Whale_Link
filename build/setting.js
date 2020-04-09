@@ -11,7 +11,7 @@ var urlList = [
     ["네이버 웹툰", "https://comic.naver.com/search.nhn?keyword={query}", "https://ssl.pstatic.net/static/comic/favicon/webtoon_favicon_32x32.ico", "웹툰"],
 ];
 
-document.getElementById("save-button").addEventListener("click", SaveUserConfig);
+document.getElementById("save-button").addEventListener("click", SaveUserConfig); // 저장 버튼 이벤트 리스너
 
 var DataDto = function (serviceName, url, faviconUrl, hotKey) {
     this.serviceName = serviceName;
@@ -37,6 +37,8 @@ else {
     // Posts = JSON.parse(localStorage.getItem("Posts"));
     let Posts = getData();
     renderPosts(Posts);
+    document.getElementsByClassName("service-add")[0].addEventListener("click", LayerPopup);
+    document.getElementsByClassName("close")[0].addEventListener("click", LayerPopdown);
 }
 
 function renderPosts(Posts) {
@@ -148,4 +150,17 @@ function checkDuplicate(contentsList) {
     }
 
     return new Set(hotKeyList).size !== hotKeyList.length; // 중복된 요소가 있으면 False return
+}
+
+function LayerPopup() {
+    let element = document.getElementById("modal");
+    
+    element.removeAttribute("class");
+    element.classList.add("three");
+}
+
+function LayerPopdown() {
+    let element = document.getElementById("modal");
+
+    element.classList.add("out");
 }

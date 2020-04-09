@@ -1,4 +1,5 @@
 document.addEventListener('keydown', userKey);
+document.cookie = "SameSite=None; Secure"; // same site problem
 
 var send = document.getElementById('send');
 send.onclick = userClick;

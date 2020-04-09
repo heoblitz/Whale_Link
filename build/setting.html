@@ -17,6 +17,36 @@
                 </ul>
             </div>
         </div>
+        <div id="modal">
+            <div class="modal-bg">
+                <div class="modal-cont">
+                    <h2>추가 하기</h2>
+                    <p>
+                        검색 기능이 있는 웹 페이지만 적용 가능합니다.
+                        <br>
+                        <br>
+                        "네이버 검색에서 안녕을 입력한 예시"
+                        <br>
+                        http://naver.com/query?=안녕  
+                        <br>
+                        http://naver.com/query?={검색어}
+                        
+                    </p>
+                    <label for="modal-url">URL</label>
+                    <input id="modal-url" class="modal-input" placeholder="https://search.naver.com/search.naver?query={query}">
+                    <label for="modal-hotkey">단축키</label>
+                    <input id="modal-hotkey" class="modal-input">
+                    <button id="modal-save">저장하기</button>
+                    <a href="#" class="close close1">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M14.1,12L22,4.1c0.6-0.6,0.6-1.5,0-2.1c-0.6-0.6-1.5-0.6-2.1,0L12,9.9L4.1,2C3.5,1.4,2.5,1.4,2,2C1.4,2.5,1.4,3.5,2,4.1
+                            L9.9,12L2,19.9c-0.6,0.6-0.6,1.5,0,2.1c0.3,0.3,0.7,0.4,1.1,0.4s0.8-0.1,1.1-0.4l7.9-7.9l7.9,7.9c0.3,0.3,0.7,0.4,1.1,0.4
+                            s0.8-0.1,1.1-0.4c0.6-0.6,0.6-1.5,0-2.1L14.1,12z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
         <script type="text/javascript" src="setting.js"></script>
     </body>
 </html>
