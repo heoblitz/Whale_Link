@@ -1,14 +1,14 @@
 var urlList = [
-    ["네이버 부동산", "https://new.land.naver.com/search?sk={query}}", "https://land.naver.com/favicon.ico", "부동산"],
-    ["네이버 쇼핑", "https://search.shopping.naver.com/search/all.nhn?query={query}", "https://ssl.pstatic.net/imgshopping/cnsv/p/im/home/favicon.ico", "쇼핑"],
-    ["네이버 지도", "https://map.naver.com/v5/search/{query}", "https://map.naver.com/v5/assets/icon/favicon-32x32.png", "지도"],
-    ["네이버 사전", "https://dict.naver.com/search.nhn?query={query}", "https://dict.naver.com/favicon.ico", "사전"],
-    ["네이버 지식인", "https://kin.naver.com/search/list.nhn?query={query}", "https://kin.naver.com/favicon.ico", "지식인"],
-    ["네이버 포스트", "https://post.naver.com/search/post.nhn?keyword={query}", "https://post.naver.com/favicon.ico", "포스트"],
-    ["네이버 TV", "https://tv.naver.com/search/clip?query={query}", "https://tv.naver.com/favicon.ico", "tv"],
-    ["네이버 검색", "https://search.naver.com/search.naver?query={query}", "https://www.naver.com/favicon.ico", "검색"],
-    ["네이버 플레이스", "https://store.naver.com/restaurants/list?query={query}", "https://store.naver.com/favicon.ico", "플레이스"],
-    ["네이버 웹툰", "https://comic.naver.com/search.nhn?keyword={query}", "https://ssl.pstatic.net/static/comic/favicon/webtoon_favicon_32x32.ico", "웹툰"],
+    ["네이버 부동산", "https://new.land.naver.com/search?sk={검색어}}", "https://land.naver.com/favicon.ico", "부동산"],
+    ["네이버 쇼핑", "https://search.shopping.naver.com/search/all.nhn?query={검색어}", "https://ssl.pstatic.net/imgshopping/cnsv/p/im/home/favicon.ico", "쇼핑"],
+    ["네이버 지도", "https://map.naver.com/v5/search/{검색어}", "https://map.naver.com/v5/assets/icon/favicon-32x32.png", "지도"],
+    ["네이버 사전", "https://dict.naver.com/search.nhn?query={검색어}", "https://dict.naver.com/favicon.ico", "사전"],
+    ["네이버 지식인", "https://kin.naver.com/search/list.nhn?query={검색어}", "https://kin.naver.com/favicon.ico", "지식인"],
+    ["네이버 포스트", "https://post.naver.com/search/post.nhn?keyword={검색어}", "https://post.naver.com/favicon.ico", "포스트"],
+    ["네이버 TV", "https://tv.naver.com/search/clip?query={검색어}", "https://tv.naver.com/favicon.ico", "tv"],
+    ["네이버 검색", "https://search.naver.com/search.naver?query={검색어}", "https://www.naver.com/favicon.ico", "검색"],
+    ["네이버 플레이스", "https://store.naver.com/restaurants/list?query={검색어}", "https://store.naver.com/favicon.ico", "플레이스"],
+    ["네이버 웹툰", "https://comic.naver.com/search.nhn?keyword={검색어}", "https://ssl.pstatic.net/static/comic/favicon/webtoon_favicon_32x32.ico", "웹툰"],
 ];
 
 document.getElementById("save-button").addEventListener("click", SaveUserConfig); // 저장 버튼 이벤트 리스너
@@ -53,7 +53,7 @@ function renderPosts(Posts) {
 
 function createHtmlList(data) {
     let htmlCode = "<li class=\"contents-list\">" +
-                        //"<a href=\"" + data["url"].substring(0, data["url"].length - 8) + "\">" + // {query} 로 GET 보내면 404 리턴하는 사이트 존재.
+                        //"<a href=\"" + data["url"].substring(0, data["url"].length - 8) + "\">" + // {검색어} 로 GET 보내면 404 리턴하는 사이트 존재.
                         "<a href=\"" + data["url"] + "\">" +
                             "<img src=\"" + data["faviconUrl"] + "\" class=\"contents-image\">" + // 슬라이싱 해서 뻬준다.
                         "</a>" +

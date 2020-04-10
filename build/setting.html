@@ -20,22 +20,21 @@
         <div id="modal">
             <div class="modal-bg">
                 <div class="modal-cont">
-                    <h2>추가 하기</h2>
-                    <p>
-                        검색 기능이 있는 웹 페이지만 적용 가능합니다.
+                    <h2 class="modal-add-title">추가 하기</h2>
+                    <h3 class="modal-add-subtitle">검색 기능이 있는 웹 페이지만 적용 가능합니다.</h3>
+                    <p class="modal-add-example">
+                        1. 먼저 등록하려는 서비스에서 검색 해주세요 ( 예시 키워드 "안녕" )
                         <br>
                         <br>
-                        "네이버 검색에서 안녕을 입력한 예시"
+                        2. URL 창에서 검색하신 키워드를 찾아주세요. ( 예시 http://naver.com/query?=안녕 )
                         <br>
-                        http://naver.com/query?=안녕  
                         <br>
-                        http://naver.com/query?={검색어}
-                        
+                        3. 키워드 대신 {검색어} 로 수정한 후에 입력하면 됩니다. ( 예시 http://naver.com/query?={검색어} )
                     </p>
-                    <label for="modal-url">URL</label>
-                    <input id="modal-url" class="modal-input" placeholder="https://search.naver.com/search.naver?query={query}">
-                    <label for="modal-hotkey">단축키</label>
-                    <input id="modal-hotkey" class="modal-input">
+                    <div class="modal-url">URL</div>
+                    <input class="modal-input" placeholder="https://search.naver.com/search.naver?query={query}">
+                    <div class="modal-hotkey">단축키</div>
+                    <input class="modal-input">
                     <button id="modal-save">저장하기</button>
                     <a href="#" class="close close1">
                         <svg viewBox="0 0 24 24">
