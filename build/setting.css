@@ -129,7 +129,7 @@ input,button:focus{
     height: 36px;
 }
 
-.contents .contents-list-add {
+.contents #contents-list-add {
     float: left;
     overflow: hidden;
     height: 46px;
@@ -141,7 +141,7 @@ input,button:focus{
     background-color: rgb(255,255,255);
 }
 
-.contents .contents-list-add .service-add {
+.contents #contents-list-add .service-add {
     float: right;
     margin-right: 6px;
     margin-top: 12px;
@@ -155,7 +155,7 @@ input,button:focus{
     margin-left: 3px;
 }
 
-.contents .contents-list-add .service-title {
+.contents #contents-list-add .service-title {
     display: inline-block;
     margin-left: 14px;
     margin-top: 12px;
@@ -167,7 +167,7 @@ input,button:focus{
 
 .modal-bg .modal-cont .modal-input {
     width: 400px;
-    height: 16px;
+    height: 22px;
     padding-left: 2px;
     margin-right: 10px;
 }
@@ -176,18 +176,34 @@ input,button:focus{
     font-size: 13px;
     color: rgb(95, 95, 104);
 }
+.modal-bg .modal-cont .modal-input {
+    width: 440px;
+}
+
+.modal-bg .modal-cont .modal-add-example {
+    margin-top: 12px;
+}
 
 .modal-bg .modal-cont .modal-add-subtitle {
     margin-top: 12px;
 }
 
-.modal-bg .modal-cont .modal-add-example {
+.modal-bg .modal-cont .modal-input-lable {
     margin-top: 20px;
+    font-size: 20px
 }
 
-.modal-bg .modal-cont .modal-url {
-    margin-top: 30px;
+.modal-bg .modal-cont .modal-menu-save {
+    float: right;
+    width: 64px;
+    height: 27px;
+    color: #fff;
+    font-size: 13px;
+    background-color: darkgray;
+    border-radius: 3px;
+    border: none;
 }
+
 /* btn */
 .btn-wrap {display: flex; justify-content : center; align-items : center; height: 100vh;}
 .btn-wrap > a {background-color:#fff; display:inline-block; color: rgba(0,0,0,0.7); padding: 13px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.26); height:23px; line-height: 23px; margin:5px; border-radius: 3px;}

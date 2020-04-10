@@ -10,8 +10,9 @@ var urlList = [
     ["네이버 플레이스", "https://store.naver.com/restaurants/list?query={검색어}", "https://store.naver.com/favicon.ico", "플레이스"],
     ["네이버 웹툰", "https://comic.naver.com/search.nhn?keyword={검색어}", "https://ssl.pstatic.net/static/comic/favicon/webtoon_favicon_32x32.ico", "웹툰"],
 ];
-
+document.cookie = "SameSite=None; Secure"; // same site problem
 document.getElementById("save-button").addEventListener("click", SaveUserConfig); // 저장 버튼 이벤트 리스너
+document.getElementById("add-button").addEventListener("click", AddUserConfig); // 추가 버튼 이벤트 리스너
 
 var DataDto = function (serviceName, url, faviconUrl, hotKey) {
     this.serviceName = serviceName;
@@ -37,18 +38,18 @@ else {
     // Posts = JSON.parse(localStorage.getItem("Posts"));
     let Posts = getData();
     renderPosts(Posts);
-    document.getElementsByClassName("service-add")[0].addEventListener("click", LayerPopup);
-    document.getElementsByClassName("close")[0].addEventListener("click", LayerPopdown);
 }
 
 function renderPosts(Posts) {
     let container = document.getElementsByClassName("container")[0];
-
+    
     for(let hotKey in Posts ) {
         container.insertAdjacentHTML('beforeend', createHtmlList(Posts[hotKey]));
     }
-
     container.insertAdjacentHTML('beforeend', createAddButton());
+
+    document.getElementsByClassName("service-add")[0].addEventListener("click", LayerPopup);
+    document.getElementsByClassName("close")[0].addEventListener("click", LayerPopdown);
 }
 
 function createHtmlList(data) {
@@ -66,7 +67,7 @@ function createHtmlList(data) {
 }
 
 function createAddButton() {
-    let htmlCode = "<li class=\"contents-list-add\">" +
+    let htmlCode = "<li id= \"contents-list-add\" class=\"contents-list\">" +
                         "<h3 class=\"service-title\">다른 서비스 추가하기</h3>" +
                         "<button class=\"service-add\">추가</button>" + 
                     "</li>";
@@ -113,7 +114,7 @@ function getHtmlData() {
     let contents = document.getElementsByClassName("contents-list");
     let contentsList = new Array();
 
-    for(var i=0; i<contents.length; i++) {
+    for(var i=0; i<contents.length - 1; i++) {
         contentsList.push(
             [
                 contents[i].querySelector('.query-name').innerText,
@@ -126,15 +127,21 @@ function getHtmlData() {
     return contentsList;
 }
 
-function SaveUserConfig() {
-    let contetsList;
+function SaveUserConfig() { // 저장 버튼 누르면 실행
+    let contentsList;
     let posts;
+    let check;
 
     contentsList = getHtmlData(); // setting.html 태그 값 읽어서 배열로 리턴
+    check = checkDuplicate(contentsList);
 
-    if (!checkDuplicate(contentsList)) { // False 일 때 저장 허용.
-        posts = saveData(contentsList);
+    if (!check) { // False 일 때 저장 허용.
+        saveData(contentsList);
         alert("저장되었습니다.");
+    }
+
+    else if (check == "blank") { // 단축키 입력되지 않을 때
+        alert("빈칸은 단축키로 지정할 수 없습니다.");
     }
 
     else {
@@ -142,24 +149,93 @@ function SaveUserConfig() {
     }
 }
 
-function checkDuplicate(contentsList) {
+function AddUserConfig() { // 서비스 추가하기.
+    let contentsList;
+    let addContentList;
+    let container;
+
+    addContentList = getUserAddHtmlData();
+    
+    if (addContentList != null) {
+        contentsList = getHtmlData();
+        contentsList.push(addContentList[0]);
+
+        check = checkDuplicate(contentsList);
+
+        if (!check) { // False 일 때 저장 허용.
+            saveData(contentsList);
+            alert("저장되었습니다.");
+
+            container = document.getElementById("contents-list-add");
+            container.insertAdjacentHTML('beforebegin', createHtmlList(
+                new DataDto(
+                    addContentList[0][0],
+                    addContentList[0][1],
+                    addContentList[0][2],
+                    addContentList[0][3],
+                )
+            ));
+        }
+
+        else {
+            alert("단축키는 중복될 수 없습니다!");
+        }
+    }
+
+    else {
+        alert("빈칸을 입력해주세요.");
+    }
+}
+
+function getUserAddHtmlData() { // 추가 창에서 HTML 값 읽어서 리턴하는 함수
+    let addContentList = new Array();
+    let serviceName, faviconUrl, url, hotkey;
+
+    let content = document.getElementsByClassName("modal-cont")[0];
+    
+    serviceName = content.querySelector('#modal-input-servicename').value;
+    url = content.querySelector('#modal-input-url').value;
+    hotkey = content.querySelector('#modal-input-hotkey').value;
+    faviconUrl = "https://www.google.com/favicon.ico";
+
+    if (serviceName != "" || url != "" || hotkey != "") {
+        addContentList.push(
+            [
+                serviceName,
+                decodeURI(url),
+                faviconUrl,
+                hotkey
+            ]
+        )
+
+        return addContentList;
+    }
+
+    return null;    
+}
+
+function checkDuplicate(contentsList) { // 리스트 받아서 단축키 중복 체크
     let hotKeyList = new Array();
 
     for(let i = 0; i < contentsList.length; i++) {
+        if ( contentsList[i][3] == "" ) {
+            return "blank"
+        }
+
         hotKeyList.push(contentsList[i][3]);
     }
 
-    return new Set(hotKeyList).size !== hotKeyList.length; // 중복된 요소가 있으면 False return
+    return new Set(hotKeyList).size != hotKeyList.length; // 중복된 요소가 있으면 False return
 }
 
-function LayerPopup() {
+function LayerPopup() { // 레이어 팝업 
     let element = document.getElementById("modal");
     
     element.removeAttribute("class");
     element.classList.add("three");
 }
 
-function LayerPopdown() {
+function LayerPopdown() { // 레이어 팝 다운 
     let element = document.getElementById("modal");
 
     element.classList.add("out");
