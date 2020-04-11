@@ -61,11 +61,13 @@ input,button:focus{
     background-color: darkgray;
     border-radius: 3px;
     border: none;
-    margin-right: 19px;
+    margin-right: 9px;
+
 }
 
-.contents .menu-save:last-of-type {
-    margin-right: 9px;
+.contents .menu-save:first-of-type {
+    margin-right: 19px;
+
 }
 
 .contents {
