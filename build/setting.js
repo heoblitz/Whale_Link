@@ -12,7 +12,10 @@ var urlList = [
 ];
 document.cookie = "SameSite=None; Secure"; // same site problem
 document.getElementById("save-button").addEventListener("click", SaveUserConfig); // 저장 버튼 이벤트 리스너
-document.getElementById("add-button").addEventListener("click", AddUserConfig); // 추가 버튼 이벤트 리스너
+document.getElementById("modal-add-button").addEventListener("click", AddUserConfig); // 추가 버튼 이벤트 리스너
+
+var el = document.getElementsByClassName("container")[0]
+var sortable = Sortable.create(el);
 
 var DataDto = function (serviceName, url, faviconUrl, hotKey) {
     this.serviceName = serviceName;
@@ -46,9 +49,9 @@ function renderPosts(Posts) {
     for(let hotKey in Posts ) {
         container.insertAdjacentHTML('beforeend', createHtmlList(Posts[hotKey]));
     }
-    container.insertAdjacentHTML('beforeend', createAddButton());
+    // container.insertAdjacentHTML('beforeend', createAddButton());
 
-    document.getElementsByClassName("service-add")[0].addEventListener("click", LayerPopup);
+    document.getElementById("add-button").addEventListener("click", LayerPopup);
     document.getElementsByClassName("close")[0].addEventListener("click", LayerPopdown);
 }
 
@@ -61,15 +64,6 @@ function createHtmlList(data) {
                         "<h3 class=\"query-name\">" + data["serviceName"] + "</h3>" +
                         "<span class=\"shortcut\">단축키</span>" +
                         "<input type=\"text\" value=\"" + data["hotKey"] + "\" class=\"contents-hotkey\">" +
-                    "</li>";
-
-    return htmlCode;
-}
-
-function createAddButton() {
-    let htmlCode = "<li id= \"contents-list-add\" class=\"contents-list\">" +
-                        "<h3 class=\"service-title\">다른 서비스 추가하기</h3>" +
-                        "<button class=\"service-add\">추가</button>" + 
                     "</li>";
 
     return htmlCode;
@@ -114,7 +108,7 @@ function getHtmlData() {
     let contents = document.getElementsByClassName("contents-list");
     let contentsList = new Array();
 
-    for(var i=0; i<contents.length - 1; i++) {
+    for(var i=0; i<contents.length; i++) {
         contentsList.push(
             [
                 contents[i].querySelector('.query-name').innerText,
@@ -150,9 +144,9 @@ function SaveUserConfig() { // 저장 버튼 누르면 실행
 }
 
 function AddUserConfig() { // 서비스 추가하기.
-    let contentsList;
-    let addContentList;
-    let container;
+    var contentsList;
+    var addContentList;
+    var container;
 
     addContentList = getUserAddHtmlData();
     
@@ -166,8 +160,8 @@ function AddUserConfig() { // 서비스 추가하기.
             saveData(contentsList);
             alert("저장되었습니다.");
 
-            container = document.getElementById("contents-list-add");
-            container.insertAdjacentHTML('beforebegin', createHtmlList(
+            container = document.getElementsByClassName("container")[0];
+            container.insertAdjacentHTML('beforeend', createHtmlList(
                 new DataDto(
                     addContentList[0][0],
                     addContentList[0][1],
@@ -240,3 +234,15 @@ function LayerPopdown() { // 레이어 팝 다운
 
     element.classList.add("out");
 }
+
+
+/*
+function createAddButton() {
+    let htmlCode = "<li id= \"contents-list-add\" class=\"contents-list\">" +
+                        "<h3 class=\"service-title\">다른 서비스 추가하기</h3>" +
+                        "<button class=\"service-add\">추가</button>" + 
+                    "</li>";
+
+    return htmlCode;
+}
+*/

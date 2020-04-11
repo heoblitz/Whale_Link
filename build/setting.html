@@ -2,8 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>네이버 링크 설정화면</title>
+        <title>웨일 링크 설정화면</title>
         <link rel="stylesheet" href="setting.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/nanumgothic.css">
     </head>
     <body>
         <div class="wrap">
@@ -12,6 +13,7 @@
             </div>
             <div class="contents">
                 <h2 class="menu-title">단축키 설정</h2>
+                <button class="menu-save" id="add-button">추가하기</button>
                 <button class="menu-save" id="save-button">저장하기</button>
                 <ul class="container">
                 </ul>
@@ -32,12 +34,12 @@
                         3. 키워드 대신 {검색어} 로 수정한 후에 입력하면 됩니다. ( 예시 http://naver.com/query?={검색어} )
                     </p>
                     <div class="modal-input-lable">서비스 이름</div>
-                    <input id="modal-input-servicename" class="modal-input" maxlength="8">
+                    <input id="modal-input-servicename" class="modal-input" maxlength="7">
                     <div class="modal-input-lable">URL</div>
-                    <input id="modal-input-url"  class="modal-input"placeholder="https://search.naver.com/search.naver?query={검색어}">
+                    <input id="modal-input-url"  class="modal-input" placeholder="https://search.naver.com/search.naver?query={검색어}">
                     <div class="modal-input-lable">단축키</div>
                     <input id="modal-input-hotkey" class="modal-input">
-                    <button id="add-button" class="modal-menu-save">추가하기</button>
+                    <button id="modal-add-button" class="modal-menu-save">추가하기</button>
                     <a href="#" class="close close1">
                         <svg viewBox="0 0 24 24">
                             <path d="M14.1,12L22,4.1c0.6-0.6,0.6-1.5,0-2.1c-0.6-0.6-1.5-0.6-2.1,0L12,9.9L4.1,2C3.5,1.4,2.5,1.4,2,2C1.4,2.5,1.4,3.5,2,4.1
@@ -48,6 +50,7 @@
                 </div>
             </div>
         </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.10.1/Sortable.js"></script>
         <script type="text/javascript" src="setting.js"></script>
     </body>
 </html>
