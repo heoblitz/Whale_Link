@@ -13,6 +13,7 @@ var urlList = [
 document.cookie = "SameSite=None; Secure"; // same site problem
 document.getElementById("save-button").addEventListener("click", SaveUserConfig); // 저장 버튼 이벤트 리스너
 document.getElementById("modal-add-button").addEventListener("click", AddUserConfig); // 추가 버튼 이벤트 리스너
+document.getElementById("delete-button").addEventListener("click", DeleteUserConfig); // 삭제 버튼 이벤트 리스너
 
 var el = document.getElementsByClassName("container")[0]
 var sortable = Sortable.create(el);
@@ -235,14 +236,42 @@ function LayerPopdown() { // 레이어 팝 다운
     element.classList.add("out");
 }
 
+function DeleteUserConfig() {
+    var element = document.getElementById("delete-button");
 
-/*
-function createAddButton() {
-    let htmlCode = "<li id= \"contents-list-add\" class=\"contents-list\">" +
-                        "<h3 class=\"service-title\">다른 서비스 추가하기</h3>" +
-                        "<button class=\"service-add\">추가</button>" + 
-                    "</li>";
+    if ( element.innerText == "완료하기" ) {
+        element.innerText = "삭제하기";
+        element.style = "background-color: darkgrey;";
 
-    return htmlCode;
+        removeDeletebutton();
+    }  
+
+    else {
+        element.innerText = "완료하기";
+        element.style = "background-color: red;";
+    
+        addDeletebutton();
+    }
 }
-*/
+
+function addDeletebutton() {
+    var element = document.getElementsByClassName("contents-list");
+    var length = element.length;
+    var img;
+
+    for(let i = 0; i < length; i++) {
+        img = document.createElement("img");
+        img.className = "query-delete-button"
+        img.src = "/icons/close.svg";
+        element[i].appendChild(img);
+    }
+}
+
+function removeDeletebutton() {
+    var element = document.getElementsByClassName("query-delete-button");
+
+    for(let i = 0; i < element.length; i++ ) {e
+        element[i].remove();
+        //alert(i);
+    }
+}

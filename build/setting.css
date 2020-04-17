@@ -131,6 +131,10 @@ input,button:focus{
     height: 36px;
 }
 
+.contents .contents-list .query-delete-button {
+    width: 14px;
+}
+
 .contents #contents-list-add {
     float: left;
     overflow: hidden;
