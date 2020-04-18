@@ -84,7 +84,6 @@ input,button:focus{
 
 .contents .contents-list {
     float: left;
-    overflow: hidden;
     height: 46px;
     width: 200px;
     padding: 10px;
@@ -132,12 +131,16 @@ input,button:focus{
 }
 
 .contents .contents-list .query-delete-button {
-    width: 14px;
+    width: 16px;
+    margin-top: -16px;
+    margin-right: -14px;
 }
 
+.contents .contents-list .query-delete-button {
+    float: right;
+}
 .contents #contents-list-add {
     float: left;
-    overflow: hidden;
     height: 46px;
     width: 200px;
     padding: 10px;

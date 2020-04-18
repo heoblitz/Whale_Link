@@ -249,7 +249,7 @@ function DeleteUserConfig() {
     else {
         element.innerText = "완료하기";
         element.style = "background-color: red;";
-    
+
         addDeletebutton();
     }
 }
@@ -257,21 +257,21 @@ function DeleteUserConfig() {
 function addDeletebutton() {
     var element = document.getElementsByClassName("contents-list");
     var length = element.length;
-    var img;
+    var img_tag;
 
     for(let i = 0; i < length; i++) {
-        img = document.createElement("img");
-        img.className = "query-delete-button"
-        img.src = "/icons/close.svg";
-        element[i].appendChild(img);
+        img_tag = document.createElement("img");
+        img_tag.className = "query-delete-button"
+        img_tag.src = "/icons/close.svg";
+        element[i].insertBefore(img_tag, element[i].firstChild);
+        //element[i].appendChild(img);
     }
 }
 
 function removeDeletebutton() {
     var element = document.getElementsByClassName("query-delete-button");
 
-    for(let i = 0; i < element.length; i++ ) {e
+    for(var i = element.length - 1; i >= 0; i-- ) {
         element[i].remove();
-        //alert(i);
     }
 }
