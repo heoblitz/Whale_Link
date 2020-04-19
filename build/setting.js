@@ -16,7 +16,15 @@ document.getElementById("modal-add-button").addEventListener("click", AddUserCon
 document.getElementById("delete-button").addEventListener("click", DeleteUserConfig); // 삭제 버튼 이벤트 리스너
 
 var el = document.getElementsByClassName("container")[0]
-var sortable = Sortable.create(el);
+//var sortable = Sortable.create(el);
+
+new Sortable(el, {
+    animation: 150,
+
+    onEnd: function (/**Event*/evt) {
+        SaveUserConfig("drag");
+    }
+});
 
 var DataDto = function (serviceName, url, faviconUrl, hotKey) {
     this.serviceName = serviceName;
@@ -59,7 +67,7 @@ function renderPosts(Posts) {
 function createHtmlList(data) {
     let htmlCode = "<li class=\"contents-list\">" +
                         //"<a href=\"" + data["url"].substring(0, data["url"].length - 8) + "\">" + // {검색어} 로 GET 보내면 404 리턴하는 사이트 존재.
-                        "<a href=\"" + data["url"] + "\">" +
+                        "<a href=\"" + data["url"] + "\" class=\"contents-url\">" +
                             "<img src=\"" + data["faviconUrl"] + "\" class=\"contents-image\">" + // 슬라이싱 해서 뻬준다.
                         "</a>" +
                         "<h3 class=\"query-name\">" + data["serviceName"] + "</h3>" +
@@ -113,7 +121,7 @@ function getHtmlData() {
         contentsList.push(
             [
                 contents[i].querySelector('.query-name').innerText,
-                decodeURI(contents[i].querySelector('a').href),
+                decodeURI(contents[i].querySelector('.contents-url').href),
                 contents[i].querySelector('.contents-image').src,
                 contents[i].querySelector('.contents-hotkey').value
             ]);
@@ -122,25 +130,38 @@ function getHtmlData() {
     return contentsList;
 }
 
-function SaveUserConfig() { // 저장 버튼 누르면 실행
+function SaveUserConfig(Eventcheck) { // 저장 버튼 & 리스트 순서 변경하면 실행
     let contentsList;
-    let posts;
     let check;
 
     contentsList = getHtmlData(); // setting.html 태그 값 읽어서 배열로 리턴
     check = checkDuplicate(contentsList);
 
-    if (!check) { // False 일 때 저장 허용.
-        saveData(contentsList);
-        alert("저장되었습니다.");
+    if (Eventcheck == "drag") { 
+        if (!check) { // False 일 때 저장 허용.
+            saveData(contentsList);
+        }
     }
 
-    else if (check == "blank") { // 단축키 입력되지 않을 때
-        alert("빈칸은 단축키로 지정할 수 없습니다.");
+    else if(Eventcheck == "delete") {
+        if (!check) {
+            saveData(contentsList);
+        }
     }
 
     else {
-        alert("단축키는 중복될 수 없습니다!");
+        if (!check) { // False 일 때 저장 허용.
+            saveData(contentsList);
+            alert("저장되었습니다.");
+        }
+    
+        else if (check == "blank") { // 단축키 입력되지 않을 때
+            alert("빈칸은 단축키로 지정할 수 없습니다.");
+        }
+    
+        else {
+            alert("단축키는 중복될 수 없습니다!");
+        }
     }
 }
 
@@ -238,12 +259,13 @@ function LayerPopdown() { // 레이어 팝 다운
 
 function DeleteUserConfig() {
     var element = document.getElementById("delete-button");
-
+    
     if ( element.innerText == "완료하기" ) {
         element.innerText = "삭제하기";
         element.style = "background-color: darkgrey;";
 
         removeDeletebutton();
+        SaveUserConfig("delete");
     }  
 
     else {
@@ -260,11 +282,26 @@ function addDeletebutton() {
     var img_tag;
 
     for(let i = 0; i < length; i++) {
+        anker_tag = document.createElement("a");
+        anker_tag.className = "query-delete-anker"
+        anker_tag.href = "#;";
+
         img_tag = document.createElement("img");
         img_tag.className = "query-delete-button"
         img_tag.src = "/icons/close.svg";
-        element[i].insertBefore(img_tag, element[i].firstChild);
-        //element[i].appendChild(img);
+
+        anker_tag.appendChild(img_tag);
+
+        element[i].insertBefore(anker_tag, element[i].firstChild);
+
+        anker_tag.addEventListener('click', function (e) {
+            if (confirm("삭제하시겠습니까?")) {
+                let parentElement;
+                //e.preventDefault();
+                parentElement = e.target.parentNode;
+                parentElement.parentNode.remove();
+            }
+        }, false);
     }
 }
 
