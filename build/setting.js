@@ -212,7 +212,7 @@ function getUserAddHtmlData() { // 추가 창에서 HTML 값 읽어서 리턴하
     serviceName = content.querySelector('#modal-input-servicename').value;
     url = content.querySelector('#modal-input-url').value;
     hotkey = content.querySelector('#modal-input-hotkey').value;
-    faviconUrl = "https://www.google.com/favicon.ico";
+    faviconUrl = getFaviconUrl(url);
 
     if (serviceName != "" || url != "" || hotkey != "") {
         addContentList.push(
@@ -311,4 +311,8 @@ function removeDeletebutton() {
     for(var i = element.length - 1; i >= 0; i-- ) {
         element[i].remove();
     }
+}
+
+function getFaviconUrl (url) {
+    return "https://www.google.com/s2/favicons?domain=" + url
 }
