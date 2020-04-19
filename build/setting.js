@@ -14,6 +14,7 @@ document.cookie = "SameSite=None; Secure"; // same site problem
 document.getElementById("save-button").addEventListener("click", SaveUserConfig); // 저장 버튼 이벤트 리스너
 document.getElementById("modal-add-button").addEventListener("click", AddUserConfig); // 추가 버튼 이벤트 리스너
 document.getElementById("delete-button").addEventListener("click", DeleteUserConfig); // 삭제 버튼 이벤트 리스너
+document.getElementById("modal-input-url").addEventListener("input", changeToUtf);
 
 var el = document.getElementsByClassName("container")[0]
 //var sortable = Sortable.create(el);
@@ -315,4 +316,17 @@ function removeDeletebutton() {
 
 function getFaviconUrl (url) {
     return "https://www.google.com/s2/favicons?domain=" + url
+}
+
+function changeToUtf(e) {
+    let text;
+    text = e.target.value
+
+    try {
+        e.target.value = decodeURI(text);
+    }
+
+    catch (e) {
+        //
+    }
 }
