@@ -6,4 +6,5 @@
 ## Chrome Extension
 
 * Frontend : HTML+CSS / vanilla js
+* SortableJS
 * Chrome Storage API
