@@ -10,7 +10,7 @@ var urlList = [
     ["네이버 플레이스", "https://store.naver.com/restaurants/list?query={검색어}", "https://store.naver.com/favicon.ico", "플레이스"],
     ["네이버 웹툰", "https://comic.naver.com/search.nhn?keyword={검색어}", "https://ssl.pstatic.net/static/comic/favicon/webtoon_favicon_32x32.ico", "웹툰"],
 ];
-document.cookie = "SameSite=None; Secure"; // same site problem
+document.cookie = "SameSite=Strict"; // same site problem
 document.getElementById("save-button").addEventListener("click", SaveUserConfig); // 저장 버튼 이벤트 리스너
 document.getElementById("modal-add-button").addEventListener("click", AddUserConfig); // 추가 버튼 이벤트 리스너
 document.getElementById("delete-button").addEventListener("click", DeleteUserConfig); // 삭제 버튼 이벤트 리스너

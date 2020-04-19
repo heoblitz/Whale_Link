@@ -1,4 +1,4 @@
-document.cookie = "SameSite=None; Secure"; // same site problem
+document.cookie = "SameSite=Strict"; // same site problem
 document.addEventListener('keydown', userKey);
 
 var send = document.getElementById('send');
