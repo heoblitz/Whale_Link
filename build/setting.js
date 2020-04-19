@@ -315,7 +315,7 @@ function removeDeletebutton() {
 }
 
 function getFaviconUrl (url) {
-    return "https://www.google.com/s2/favicons?domain=" + url
+    return "https://www.google.com/s2/favicons?sz=64&domain=" + url
 }
 
 function changeToUtf(e) {
