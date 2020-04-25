@@ -5,6 +5,8 @@
 ![Alt Text](image.gif)
 ## Chrome Extension
 
+<a href="https://store.whale.naver.com/detail/dggkdgdigpkmbeobcbhajdlfggkbnddh">웨일 스토어 링크</a>
+
 * Frontend : HTML+CSS / vanilla js
 * SortableJS
 * Chrome Storage API
