@@ -1,4 +1,4 @@
-# Whale_Link  [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/wone2287/Whale_Link/blob/master/LICENSE)
+# Whale_Link  [![MIT license](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/wone2287/Whale_Link/blob/master/LICENSE)
 
 
 터미널 명령어 형식으로 웹 서핑을 도와주는 확장 앱입니다.  
